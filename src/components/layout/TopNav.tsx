@@ -20,7 +20,11 @@ export function TopNav({ title, subtitle, onOpenMenu }: TopNavProps) {
   return (
     <header
       className="sticky top-0 z-20 border-b bord-soft no-print"
-      style={{ background: 'color-mix(in srgb, var(--bg) 78%, transparent)', backdropFilter: 'blur(14px)' }}
+      style={{
+        background: 'color-mix(in srgb, var(--bg) 78%, transparent)',
+        backdropFilter: 'blur(14px)',
+        paddingTop: 'env(safe-area-inset-top, 0px)',
+      }}
     >
       <div className="mx-auto flex h-[62px] max-w-[1440px] items-center gap-3 px-4 sm:px-6">
         <button
@@ -81,6 +85,7 @@ function SearchBox({ onPick }: { onPick: (id: string) => void }) {
             placeholder="Search lessons…"
             aria-label="Search lessons"
             className="w-36 bg-transparent text-[12.5px] outline-none placeholder:text-[var(--text-faint)]"
+            style={{ fontSize: '16px' }}
           />
           <button type="button" onClick={() => { setOpen(false); setQ(''); }} aria-label="Close search" className="text-[var(--text-faint)] hover:text-[var(--text)]">
             <X size={13} />

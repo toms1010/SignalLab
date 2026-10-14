@@ -26,7 +26,7 @@ export default function App() {
   const { title, subtitle } = usePageTitle(location.pathname);
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-dvh">
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
@@ -39,7 +39,7 @@ export default function App() {
         Keeping them in one flex row is what stops the content from being
         pushed below the navigation.
       */}
-      <div className="relative z-10 flex min-h-screen">
+      <div className="relative z-10 flex min-h-dvh">
         <Sidebar open={navOpen} onClose={closeNav} />
 
         <div className="flex min-w-0 flex-1 flex-col">

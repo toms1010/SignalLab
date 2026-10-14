@@ -105,6 +105,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         style={{
           background: 'color-mix(in srgb, var(--bg) 84%, transparent)',
           backdropFilter: 'blur(16px)',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
         {/* Brand */}
@@ -150,6 +151,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search lessons…"
             className="w-full rounded-xl border bord bg-[var(--panel)] px-3 py-2 text-[13px] text-[var(--text)] outline-none placeholder:text-[var(--text-faint)] focusable"
+            style={{ fontSize: '16px' }}
           />
         </div>
 
