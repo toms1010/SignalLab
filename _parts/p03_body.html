@@ -1,0 +1,355 @@
+<body>
+
+<!-- ============================== TOP BAR ============================== -->
+<header class="topbar" role="banner">
+  <button class="icon-btn menu-btn" id="btnMenu" aria-label="Open navigation menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M2 12h3l2-6 3 12 3-9 2 5 2-3h5" stroke="#00F0FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="brand-title">Signal<span>Lab</span></div>
+      <div class="brand-sub">Communication Systems</div>
+    </div>
+  </div>
+  <div class="topbar-crumb" id="crumb" aria-live="polite">
+    <span class="m" id="crumbMod">M0</span>
+    <span class="t" id="crumbTitle">Course overview</span>
+  </div>
+  <div class="topbar-tools">
+    <div class="progress-chip" title="Overall course completion">
+      <span class="lbl tiny" style="color:var(--txt-3)">Progress</span>
+      <span class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progBarWrap"><i id="progBar"></i></span>
+      <b id="progPct">0%</b>
+    </div>
+    <button class="icon-btn" id="btnTheme" aria-label="Toggle light and dark theme" title="Toggle theme">
+      <svg viewBox="0 0 24 24" id="themeIcon"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="nav-scrim" id="navScrim" hidden></div>
+
+<div class="app">
+
+  <!-- ============================== SIDEBAR ============================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Course navigation">
+    <div class="side-search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="text" id="sideSearch" placeholder="Search lessons &amp; topics…" aria-label="Search lessons and topics" autocomplete="off" />
+    </div>
+    <nav id="sideNav" aria-label="Modules and lessons"></nav>
+    <div class="side-sec">
+      <div class="side-title">Reference</div>
+      <div class="side-nav-item" data-view="formulas" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M4 19V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 8h7M8 12h7M8 16h4"/></svg>
+        <span>Formula Reference</span><span class="badge" id="badgeFormulas">0</span>
+      </div>
+      <div class="side-nav-item" data-view="glossary" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span>Technical Glossary</span><span class="badge" id="badgeGlossary">0</span>
+      </div>
+      <div class="side-nav-item" data-view="resources" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 1 6.5 18H20v3H6.5A2.5 2.5 0 0 1 4 20.5z"/></svg>
+        <span>Learning Resources</span><span class="badge" id="badgeRes">0</span>
+      </div>
+      <div class="side-nav-item" data-view="myresources" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg>
+        <span>My Learning Resources</span><span class="badge" id="badgeSaved">0</span>
+      </div>
+      <div class="side-nav-item" data-view="paths" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6h8a3 3 0 0 1 0 6h-8a3 3 0 0 0 0 6h8"/></svg>
+        <span>Guided Learning Paths</span><span class="badge" id="badgePath">3</span>
+      </div>
+      <div class="side-nav-item" data-view="exercises" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M9 11l2 2 4-4"/><path d="M20 12a8 8 0 1 1-4.6-7.2"/></svg>
+        <span>Practical Exercises</span><span class="badge" id="badgeEx">0</span>
+      </div>
+    </div>
+    <div class="side-sec">
+      <div class="side-title">Manage</div>
+      <div class="side-nav-item" data-view="settings" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9v.09a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1z"/></svg>
+        <span>Progress &amp; Settings</span>
+      </div>
+    </div>
+    <div class="side-sec">
+      <div class="side-title">Utilities</div>
+      <div class="side-nav-item" id="btnCheck" role="button" tabindex="0">
+        <svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M18 6l-2 2M8 16l-2 2"/></svg>
+        <span>Diagnostics</span>
+      </div>
+    </div>
+    <p class="tiny" style="margin-top:20px;padding:0 8px">
+      All lesson text, formulas and simulations are embedded in this file. Progress is stored locally in your browser only.
+    </p>
+  </aside>
+
+  <!-- ============================== MAIN ============================== -->
+  <main class="main" id="main">
+
+    <!-- ========== DASHBOARD ========== -->
+    <section class="view" id="view-dashboard" aria-label="Course dashboard">
+      <div class="pad">
+        <div class="hero">
+          <h1>Digital &amp; Analog Communication Systems</h1>
+          <p class="sub">
+            A six-module interactive laboratory. Every lesson pairs the mathematics with a live simulation you can drive:
+            change a parameter, watch the signal respond, and read the measurement that explains it.
+          </p>
+          <div class="hero-actions">
+            <button class="btn pri" id="btnContinue">
+              <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z"/></svg><span id="continueLabel">Start Module 1</span>
+            </button>
+            <button class="btn" data-view="paths">
+              <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6h8a3 3 0 0 1 0 6h-8a3 3 0 0 0 0 6h8"/></svg>
+              Choose a learning path
+            </button>
+            <button class="btn" data-view="resources">
+              <svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/></svg>
+              Learning resources
+            </button>
+          </div>
+          <div class="hero-stats" id="heroStats"></div>
+        </div>
+
+        <div class="hr-bright"></div>
+        <div class="row" style="justify-content:space-between;margin-bottom:14px">
+          <h2 style="margin:0">Modules</h2>
+          <div class="row">
+            <button class="chip-btn on" data-modfilter="all">All</button>
+            <button class="chip-btn" data-modfilter="1">1</button>
+            <button class="chip-btn" data-modfilter="2">2</button>
+            <button class="chip-btn" data-modfilter="3">3</button>
+            <button class="chip-btn" data-modfilter="4">4</button>
+            <button class="chip-btn" data-modfilter="5">5</button>
+            <button class="chip-btn" data-modfilter="6">6</button>
+          </div>
+        </div>
+        <div class="mod-grid" id="modGrid"></div>
+
+        <div class="split-2" style="margin-top:22px">
+          <div class="card">
+            <div class="card-h">Recent learning activity</div>
+            <div id="recentBox"></div>
+          </div>
+          <div class="card">
+            <div class="card-h">Quiz performance</div>
+            <div class="chart-box" style="margin-bottom:10px"><h4>Module checkpoint scores (best attempt, %)</h4><div id="quizChartWrap"><canvas id="quizChart" height="150"></canvas></div></div>
+            <div id="weakTopics"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== LESSON ========== -->
+    <section class="view" id="view-lesson" aria-label="Lesson workspace">
+      <div class="lesson-wrap">
+        <article class="lesson-text" id="lessonText"></article>
+        <aside class="lesson-viz" id="lessonViz" aria-label="Interactive laboratory"></aside>
+      </div>
+    </section>
+
+    <!-- ========== FORMULA REFERENCE ========== -->
+    <section class="view" id="view-formulas" aria-label="Formula reference">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Reference</div>
+          <h1>Formula Reference</h1>
+          <p>Every formula used in SignalLab, with variable definitions, units, assumptions and — where useful — a worked numerical example. Click <b>Copy</b> to take the plain-text form with you.</p>
+        </div>
+        <div class="filters">
+          <div class="fsearch">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input type="text" id="fxSearch" placeholder="Search formulas, variables, units…" aria-label="Search formulas" autocomplete="off" />
+          </div>
+          <button class="chip-btn on" data-fxmod="all">All modules</button>
+          <button class="chip-btn" data-fxmod="1">M1</button>
+          <button class="chip-btn" data-fxmod="2">M2</button>
+          <button class="chip-btn" data-fxmod="3">M3</button>
+          <button class="chip-btn" data-fxmod="4">M4</button>
+          <button class="chip-btn" data-fxmod="5">M5</button>
+          <button class="chip-btn" data-fxmod="6">M6</button>
+          <button class="chip-btn" id="fxMathToggle">Toggle math rendering</button>
+        </div>
+        <div class="count-line" id="fxCount"></div>
+        <div id="fxBody"></div>
+      </div>
+    </section>
+
+    <!-- ========== GLOSSARY ========== -->
+    <section class="view" id="view-glossary" aria-label="Technical glossary">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Reference</div>
+          <h1>Technical Glossary</h1>
+          <p>Hover, focus or tap any underlined term inside a lesson to see this definition without leaving the page.</p>
+        </div>
+        <div class="filters">
+          <div class="fsearch">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input type="text" id="glSearch" placeholder="Search glossary…" aria-label="Search glossary" autocomplete="off" />
+          </div>
+        </div>
+        <div class="count-line" id="glCount"></div>
+        <div class="gloss-grid" id="glBody"></div>
+      </div>
+    </section>
+
+    <!-- ========== RESOURCES ========== -->
+    <section class="view" id="view-resources" aria-label="Learning resources library">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Learning Resources</div>
+          <h1>Resource Library</h1>
+          <p>Supplementary material curated from official and long-established sources: universities, standards bodies, open textbooks and engineering documentation. Bookmarks and completion are saved on this device. <b>These links are external to SignalLab — SignalLab itself remains fully usable offline.</b></p>
+        </div>
+        <div class="note info"><b>Access note.</b> Items marked <span class="tag book">BOOK</span> are commercial titles: you need a purchase, library or institutional copy. Items marked <span class="tag doc">OPEN</span> are free to read. SignalLab does not host or redistribute any copyrighted material.</div>
+        <div class="filters">
+          <div class="fsearch">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input type="text" id="resSearch" placeholder="Search title, author, keyword…" aria-label="Search resources" autocomplete="off" />
+          </div>
+          <select id="resType" aria-label="Filter by resource type" style="width:auto;min-width:150px"></select>
+          <select id="resDiff" aria-label="Filter by difficulty" style="width:auto;min-width:135px"></select>
+          <select id="resFormat" aria-label="Filter by format" style="width:auto;min-width:135px"></select>
+          <select id="resMod" aria-label="Filter by module" style="width:auto;min-width:135px"></select>
+          <button class="chip-btn" id="resClear">Clear filters</button>
+        </div>
+        <div class="count-line" id="resCount"></div>
+        <div class="res-grid" id="resGrid"></div>
+      </div>
+    </section>
+
+    <!-- ========== MY RESOURCES ========== -->
+    <section class="view" id="view-myresources" aria-label="My learning resources">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Learning Resources</div>
+          <h1>My Learning Resources</h1>
+          <p>Your bookmarked items, finished materials and unfinished exercises — all read from this browser's local storage.</p>
+        </div>
+        <div class="split-2" style="margin-bottom:18px">
+          <div class="card">
+            <div class="card-h">Bookmarked <span class="spacer"></span><span class="badge yel" id="myBmCount">0</span></div>
+            <div id="myBmList"></div>
+          </div>
+          <div class="card">
+            <div class="card-h">Completed <span class="spacer"></span><span class="badge grn" id="myDoneCount">0</span></div>
+            <div id="myDoneList"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-h">Unfinished exercises</div>
+          <div id="myExList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== LEARNING PATHS ========== -->
+    <section class="view" id="view-paths" aria-label="Guided learning paths">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Learning Resources</div>
+          <h1>Guided Learning Paths</h1>
+          <p>Three ordered routes through the same 39 lessons. Selecting a path is remembered on this device; every step is a real lesson.</p>
+        </div>
+        <div class="path-grid" id="pathGrid"></div>
+      </div>
+    </section>
+
+    <!-- ========== EXERCISES ========== -->
+    <section class="view" id="view-exercises" aria-label="Practical exercises">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Learning Resources</div>
+          <h1>Practical Exercises &amp; Mini-Labs</h1>
+          <p>Ten self-checked problems. Enter an answer, compare numerically (with a tolerance you control) and read the full step-by-step solution. Each solved exercise is recorded locally.</p>
+        </div>
+        <div class="filters">
+          <select id="exMod" aria-label="Filter exercises by module" style="width:auto;min-width:160px"></select>
+          <div class="row" style="margin-left:auto">
+            <span class="tiny">Solved:</span>
+            <span class="badge grn" id="exSolvedCount">0 / 10</span>
+            <button class="btn sm" id="exReset">Reset exercise results</button>
+          </div>
+        </div>
+        <div id="exBody"></div>
+      </div>
+    </section>
+
+    <!-- ========== SETTINGS ========== -->
+    <section class="view" id="view-settings" aria-label="Progress and settings">
+      <div class="pad">
+        <div class="page-head">
+          <div class="eyebrow">Manage</div>
+          <h1>Progress &amp; Settings</h1>
+          <p>Everything SignalLab remembers lives in this browser's <code>localStorage</code> under a single key. Nothing is uploaded anywhere.</p>
+        </div>
+        <div class="split-2">
+          <div class="card">
+            <div class="card-h">Completion breakdown</div>
+            <div class="tbl-wrap"><table id="statTable"><thead><tr><th>Module</th><th>Lessons</th><th>Completed</th><th>Quiz best</th><th>Progress</th></tr></thead><tbody></tbody></table></div>
+          </div>
+          <div class="card">
+            <div class="card-h">Preferences</div>
+            <div class="stack">
+              <div class="row" style="justify-content:space-between"><span class="tiny">Theme</span>
+                <div class="seg" id="themeSeg" role="group" aria-label="Theme">
+                  <button data-theme-val="dark" class="on">Dark</button><button data-theme-val="light">Light</button>
+                </div>
+              </div>
+              <div class="row" style="justify-content:space-between"><span class="tiny">Render mathematical notation with KaTeX</span>
+                <div class="switch"><input type="checkbox" id="optKatex" checked aria-label="Render math with KaTeX"><span class="track"></span><span class="thumb"></span></div>
+              </div>
+              <div class="row" style="justify-content:space-between"><span class="tiny">Animate interface transitions (GSAP)</span>
+                <div class="switch"><input type="checkbox" id="optGsap" checked aria-label="Animate interface transitions"><span class="track"></span><span class="thumb"></span></div>
+              </div>
+              <div class="row" style="justify-content:space-between"><span class="tiny">Show live waveforms while a lab is hidden</span>
+                <div class="switch"><input type="checkbox" id="optAlways" aria-label="Keep animations running when hidden"><span class="track"></span><span class="thumb"></span></div>
+              </div>
+              <p class="tiny">Live waveforms pause automatically when the tab is in the background or the lab is scrolled out of view. If your browser reports a reduced-motion preference, non-essential animation is disabled automatically.</p>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h">Stored data</div>
+            <div class="kv" id="storeKV"></div>
+            <div class="sep"></div>
+            <div class="row">
+              <button class="btn" id="btnExport">Export progress (JSON)</button>
+              <button class="btn" id="btnImport">Import progress</button>
+              <button class="btn warn" id="btnResetLessons">Reset lesson &amp; quiz progress</button>
+              <button class="btn danger" id="btnResetAll">Reset all SignalLab data</button>
+            </div>
+            <input type="file" id="fileImport" accept="application/json,.json" hidden />
+            <p class="tiny" style="margin-top:12px">
+              <b>What is removed:</b> lesson completion flags, quiz scores and attempt history, saved learning path,
+              bookmarked/completed resources, solved-exercise records, last-visited position and simulator preferences.
+              External links and the lessons themselves are unaffected.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-h">Library status</div>
+            <div class="kv" id="libKV"></div>
+            <div class="sep"></div>
+            <button class="btn" id="btnCheck2">Run diagnostics</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="tip" id="tip" role="tooltip" aria-hidden="true"></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<div class="scrim" id="scrim" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal" id="modal"></div>
+</div>
+
+<script>

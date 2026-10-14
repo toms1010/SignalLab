@@ -1,0 +1,544 @@
+@import 'tailwindcss';
+@import 'katex/dist/katex.min.css';
+
+/* ==========================================================================
+   SignalLab design tokens — engineering-laboratory aesthetic.
+   Both themes expose the same variable names so every component is written once.
+   ========================================================================== */
+@theme {
+  --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-neon: #00f0ff;
+  --color-mag: #ff00aa;
+  --color-gold: #ffd700;
+  --color-ink: #0a0e1a;
+
+  --radius-panel: 16px;
+}
+
+:root {
+  --bg: #0a0e1a;
+  --bg-2: #0d1222;
+  --panel: rgb(255 255 255 / 0.045);
+  --panel-strong: rgb(255 255 255 / 0.08);
+  --stroke: rgb(255 255 255 / 0.09);
+  --stroke-soft: rgb(255 255 255 / 0.06);
+  --text: #eef2ff;
+  --text-dim: #9aa7c7;
+  --text-faint: #64719a;
+  --cyan: #00f0ff;
+  --magenta: #ff00aa;
+  --gold: #ffd700;
+  --green: #2ee6a8;
+  --red: #ff5470;
+  --violet: #8b7bff;
+  --orange: #ff8a3d;
+  --grid-line: rgb(120 160 255 / 0.05);
+  --glass-shadow: 0 12px 40px rgb(0 0 0 / 0.45);
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--cyan);
+}
+
+[data-theme='light'] {
+  --bg: #eef1fa;
+  --bg-2: #e3e9f7;
+  --panel: rgb(255 255 255 / 0.72);
+  --panel-strong: rgb(255 255 255 / 0.92);
+  --stroke: rgb(20 32 80 / 0.12);
+  --stroke-soft: rgb(20 32 80 / 0.08);
+  --text: #101736;
+  --text-dim: #43507a;
+  --text-faint: #6b779e;
+  --cyan: #0090b3;
+  --magenta: #d1007f;
+  --gold: #a97e00;
+  --green: #07976a;
+  --red: #d92c4d;
+  --violet: #5b48c9;
+  --orange: #c05a12;
+  --grid-line: rgb(40 70 160 / 0.07);
+  --glass-shadow: 0 12px 36px rgb(40 60 140 / 0.14);
+}
+
+/* ------------------------------------------------------------------ base */
+* {
+  -webkit-tap-highlight-color: transparent;
+  border-color: var(--stroke);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  /* This is a fixed-viewport application shell: every scrollable region is an
+     inner panel, so the document itself must never pan sideways. */
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.22;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+code,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--panel-strong);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+}
+
+::selection {
+  background: rgb(0 240 255 / 0.3);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--stroke);
+  border-radius: 99px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--cyan);
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--stroke) transparent;
+}
+
+/* ------------------------------------------------------------ utilities */
+.mono {
+  font-family: var(--font-mono);
+}
+.display {
+  font-family: var(--font-display);
+}
+.text-dim {
+  color: var(--text-dim);
+}
+.text-faint {
+  color: var(--text-faint);
+}
+.bord {
+  border-color: var(--stroke);
+}
+.bord-soft {
+  border-color: var(--stroke-soft);
+}
+
+/* Visible, high-contrast focus ring for keyboard users only. */
+.focusable:focus-visible {
+  box-shadow: var(--focus-ring);
+  outline: none;
+}
+
+/* =====================================================================
+   Surfaces
+   ===================================================================== */
+.glass {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.glass-hover:hover {
+  border-color: rgb(0 240 255 / 0.42);
+  box-shadow:
+    0 0 0 1px rgb(0 240 255 / 0.18),
+    0 14px 44px rgb(0 0 0 / 0.5);
+}
+
+.glass-solid {
+  background: var(--panel-strong);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-panel);
+}
+
+.bg-blueprint {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* =====================================================================
+   Sliders — glowing track driven by a --fill custom property
+   ===================================================================== */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--cyan) var(--fill, 50%), rgb(140 160 220 / 0.22) var(--fill, 50%));
+  outline: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--cyan);
+  box-shadow:
+    0 0 12px rgb(0 240 255 / 0.85),
+    0 0 3px rgb(0 240 255 / 0.9);
+  transition: transform 0.15s ease;
+}
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 12px rgb(0 240 255 / 0.85);
+}
+input[type='range']:focus-visible {
+  box-shadow: none;
+}
+input[type='range']:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 4px var(--bg),
+    0 0 0 6px var(--cyan),
+    0 0 14px rgb(0 240 255 / 0.9);
+}
+
+input[type='range'].magenta {
+  background: linear-gradient(90deg, var(--magenta) var(--fill, 50%), rgb(140 160 220 / 0.22) var(--fill, 50%));
+}
+input[type='range'].magenta::-webkit-slider-thumb {
+  border-color: var(--magenta);
+  box-shadow: 0 0 12px rgb(255 0 170 / 0.85);
+}
+input[type='range'].magenta::-moz-range-thumb {
+  border-color: var(--magenta);
+  box-shadow: 0 0 12px rgb(255 0 170 / 0.85);
+}
+
+input[type='range'].gold {
+  background: linear-gradient(90deg, var(--gold) var(--fill, 50%), rgb(140 160 220 / 0.22) var(--fill, 50%));
+}
+input[type='range'].gold::-webkit-slider-thumb {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgb(255 215 0 / 0.85);
+}
+input[type='range'].gold::-moz-range-thumb {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgb(255 215 0 / 0.85);
+}
+
+input[type='range'].green {
+  background: linear-gradient(90deg, var(--green) var(--fill, 50%), rgb(140 160 220 / 0.22) var(--fill, 50%));
+}
+input[type='range'].green::-webkit-slider-thumb {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgb(46 230 168 / 0.85);
+}
+input[type='range'].green::-moz-range-thumb {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgb(46 230 168 / 0.85);
+}
+
+/* =====================================================================
+   Switch
+   ===================================================================== */
+.switch {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border-radius: 99px;
+  background: rgb(140 160 220 / 0.25);
+  border: 1px solid var(--stroke);
+  flex: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+  padding: 0;
+}
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.25s cubic-bezier(0.6, 1.6, 0.4, 1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+}
+.switch.on {
+  background: var(--cyan);
+}
+.switch.on::after {
+  transform: translateX(20px);
+}
+.switch.magenta.on {
+  background: var(--magenta);
+}
+.switch.gold.on {
+  background: var(--gold);
+}
+.switch.green.on {
+  background: var(--green);
+}
+
+/* =====================================================================
+   Glossary tooltip term
+   ===================================================================== */
+.term {
+  position: relative;
+  border-bottom: 1.5px dotted var(--cyan);
+  color: var(--cyan);
+  cursor: help;
+  font-weight: 600;
+  background: none;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  padding: 0;
+  font: inherit;
+}
+.term .tip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  width: 250px;
+  max-width: 72vw;
+  background: #0d1526;
+  color: #dbe7ff;
+  border: 1px solid rgb(0 240 255 / 0.4);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+  white-space: normal;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  z-index: 60;
+  box-shadow:
+    0 14px 40px rgb(0 0 0 / 0.6),
+    0 0 18px rgb(0 240 255 / 0.12);
+}
+[data-theme='light'] .term .tip {
+  background: #101736;
+}
+.term:hover .tip,
+.term:focus-visible .tip,
+.term:focus .tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* =====================================================================
+   Micro-animations
+   ===================================================================== */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes blinkdot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@keyframes gradShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.anim-floaty {
+  animation: floaty 5s ease-in-out infinite;
+}
+.anim-pulse-glow {
+  animation: pulseGlow 2.2s ease-in-out infinite;
+}
+.anim-blink {
+  animation: blinkdot 1.1s ease-in-out infinite;
+}
+
+.grad-text {
+  background: linear-gradient(90deg, var(--cyan), var(--magenta), var(--gold), var(--cyan));
+  background-size: 280% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradShift 9s ease infinite;
+}
+
+.bit-chip {
+  transition: all 0.18s ease;
+}
+.bit-chip:hover {
+  transform: translateY(-2px);
+}
+
+/* =====================================================================
+   Rich-text prose (lesson body copy)
+   ===================================================================== */
+.prose-lab {
+  color: var(--text-dim);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+.prose-lab p {
+  margin: 0 0 0.9em;
+}
+.prose-lab ul,
+.prose-lab ol {
+  margin: 0.4em 0 1em;
+  padding-left: 1.3em;
+}
+.prose-lab li {
+  margin: 0.35em 0;
+}
+.prose-lab strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Formula display: never clipped, scrolls only when it must. */
+.math-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  /* Room for tall fraction glyphs so KaTeX is never vertically cropped. */
+  padding: 0.35rem 0;
+}
+.math-scroll .katex-display {
+  margin: 0;
+  padding: 0.2rem 0;
+}
+
+/* =====================================================================
+   Reduced motion
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screen-reader-only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: var(--cyan);
+  color: #04121a;
+  font-weight: 700;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
